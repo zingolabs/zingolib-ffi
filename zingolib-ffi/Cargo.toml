@@ -1,0 +1,30 @@
+[package]
+name = "zingolib-ffi"
+version = "1.0.1"
+authors = ["Zingolabs <zingo@zingolabs.com>"]
+edition = "2021"
+
+[dependencies]
+zingolib = { git = "https://github.com/zingolabs/zingolib", default-features = true, tag = "1.11.0", features = [
+    "test-elevation",
+] }
+http = "1.1.0"
+lazy_static = "1.4.0"
+base64 = "0.22"
+android_logger = "0.11"
+log = "0.4"
+tokio = "1.43.0"
+rustls = "0.23.22"
+uniffi = { version = "0.27", features = ["cli"] }
+camino = "1.1.9"
+
+[build-dependencies]
+uniffi_build = { version = "0.27", features = ["builtin-bindgen"] }
+
+[lib]
+crate-type = ["cdylib", "staticlib"]
+name = "zingolib"
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "uniffi-bindgen.rs"
