@@ -30,7 +30,7 @@ cargo run \
     --bin uniffi-bindgen \
     generate ./src/zingolib.udl \
     --language kotlin \
-    --out-dir ../zingolib-android/lib/src/main/kotlin/
+    --out-dir ../zingolib_android/lib/src/main/kotlin/
 
 time cargo ndk -t arm64-v8a -t armeabi-v7a -t x86 -t x86_64 build --release -Z build-std
 
@@ -51,16 +51,16 @@ llvm-objcopy --remove-section .comment ../target/x86_64-linux-android/release/li
 # Export build artifacts
 
 # Create folders
-mkdir -p ../zingolib-android/lib/src/main/jniLibs/arm64-v8a
-mkdir -p ../zingolib-android/lib/src/main/jniLibs/armeabi-v7a
-mkdir -p ../zingolib-android/lib/src/main/jniLibs/x86
-mkdir -p ../zingolib-android/lib/src/main/jniLibs/x86_64
+mkdir -p ../zingolib_android/lib/src/main/jniLibs/arm64-v8a
+mkdir -p ../zingolib_android/lib/src/main/jniLibs/armeabi-v7a
+mkdir -p ../zingolib_android/lib/src/main/jniLibs/x86
+mkdir -p ../zingolib_android/lib/src/main/jniLibs/x86_64
 
-mkdir -p ../zingolib-android/lib/build/generated/source/uniffi/debug/java/uniffi/zingo
-mkdir -p ../zingolib-android/lib/build/generated/source/uniffi/release/java/uniffi/zingo
+mkdir -p ../zingolib_android/lib/build/generated/source/uniffi/debug/java/uniffi/zingo
+mkdir -p ../zingolib_android/lib/build/generated/source/uniffi/release/java/uniffi/zingo
 
 # Copy artifacts
-cp ../target/x86_64-linux-android/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/x86_64/zingolib.so
-cp ../target/i686-linux-android/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/x86/zingolib.so
-cp ../target/armv7-linux-androideabi/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/armeabi-v7a/zingolib.so
-cp ../target/aarch64-linux-android/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/arm64-v8a/zingolib.so
+cp ../target/x86_64-linux-android/release/libzingolib.so ../zingolib_android/lib/src/main/jniLibs/x86_64/libzingolib_android.so
+cp ../target/i686-linux-android/release/libzingolib.so ../zingolib_android/lib/src/main/jniLibs/x86/libzingolib_android.so
+cp ../target/armv7-linux-androideabi/release/libzingolib.so ../zingolib_android/lib/src/main/jniLibs/armeabi-v7a/libzingolib_android.so
+cp ../target/aarch64-linux-android/release/libzingolib.so ../zingolib_android/lib/src/main/jniLibs/arm64-v8a/libzingolib_android.so

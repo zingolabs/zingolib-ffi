@@ -3,7 +3,7 @@
 
 @file:Suppress("NAME_SHADOWING")
 
-package org.zingolabs.zingolib-android
+package org.zingolabs.zingolib_android
 
 // Common helper code.
 //
@@ -58,7 +58,7 @@ open class RustBuffer : Structure() {
     companion object {
         internal fun alloc(size: ULong = 0UL) = uniffiRustCall() { status ->
             // Note: need to convert the size to a `Long` value to make this work with JVM.
-            UniffiLib.INSTANCE.ffi_zingolib_rustbuffer_alloc(size.toLong(), status)
+            UniffiLib.INSTANCE.ffi_zingolib_android_rustbuffer_alloc(size.toLong(), status)
         }.also {
             if(it.data == null) {
                throw RuntimeException("RustBuffer.alloc() returned null data pointer (size=${size})")
@@ -74,7 +74,7 @@ open class RustBuffer : Structure() {
         }
 
         internal fun free(buf: RustBuffer.ByValue) = uniffiRustCall() { status ->
-            UniffiLib.INSTANCE.ffi_zingolib_rustbuffer_free(buf, status)
+            UniffiLib.INSTANCE.ffi_zingolib_android_rustbuffer_free(buf, status)
         }
     }
 
@@ -752,33 +752,33 @@ internal interface UniffiForeignFutureCompleteVoid : com.sun.jna.Callback {
 // when the library is loaded.
 internal interface IntegrityCheckingUniffiLib : Library {
     // Integrity check functions only
-    fun uniffi_zingolib_checksum_func_execute_command(
+    fun uniffi_zingolib_android_checksum_func_execute_command(
 ): Short
-fun uniffi_zingolib_checksum_func_get_developer_donation_address(
+fun uniffi_zingolib_android_checksum_func_get_developer_donation_address(
 ): Short
-fun uniffi_zingolib_checksum_func_get_latest_block_server(
+fun uniffi_zingolib_android_checksum_func_get_latest_block_server(
 ): Short
-fun uniffi_zingolib_checksum_func_get_transaction_summaries(
+fun uniffi_zingolib_android_checksum_func_get_transaction_summaries(
 ): Short
-fun uniffi_zingolib_checksum_func_get_value_transfers(
+fun uniffi_zingolib_android_checksum_func_get_value_transfers(
 ): Short
-fun uniffi_zingolib_checksum_func_get_zennies_for_zingo_donation_address(
+fun uniffi_zingolib_android_checksum_func_get_zennies_for_zingo_donation_address(
 ): Short
-fun uniffi_zingolib_checksum_func_init_from_b64(
+fun uniffi_zingolib_android_checksum_func_init_from_b64(
 ): Short
-fun uniffi_zingolib_checksum_func_init_from_seed(
+fun uniffi_zingolib_android_checksum_func_init_from_seed(
 ): Short
-fun uniffi_zingolib_checksum_func_init_from_ufvk(
+fun uniffi_zingolib_android_checksum_func_init_from_ufvk(
 ): Short
-fun uniffi_zingolib_checksum_func_init_logging(
+fun uniffi_zingolib_android_checksum_func_init_logging(
 ): Short
-fun uniffi_zingolib_checksum_func_init_new(
+fun uniffi_zingolib_android_checksum_func_init_new(
 ): Short
-fun uniffi_zingolib_checksum_func_save_to_b64(
+fun uniffi_zingolib_android_checksum_func_save_to_b64(
 ): Short
-fun uniffi_zingolib_checksum_func_set_crypto_default_provider_to_ring(
+fun uniffi_zingolib_android_checksum_func_set_crypto_default_provider_to_ring(
 ): Short
-fun ffi_zingolib_uniffi_contract_version(
+fun ffi_zingolib_android_uniffi_contract_version(
 ): Int
 
 }
@@ -788,7 +788,7 @@ fun ffi_zingolib_uniffi_contract_version(
 internal interface UniffiLib : Library {
     companion object {
         internal val INSTANCE: UniffiLib by lazy {
-            val componentName = "zingolib_android"
+            val componentName = "zingolib"
             // For large crates we prevent `MethodTooLargeException` (see #2340)
             // N.B. the name of the extension is very misleading, since it is 
             // rather `InterfaceTooLargeException`, caused by too many methods 
@@ -823,143 +823,143 @@ internal interface UniffiLib : Library {
     }
 
     // FFI functions
-    fun uniffi_zingolib_fn_func_execute_command(`cmd`: RustBuffer.ByValue,`args`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+    fun uniffi_zingolib_android_fn_func_execute_command(`cmd`: RustBuffer.ByValue,`args`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_get_developer_donation_address(uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_get_developer_donation_address(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_get_latest_block_server(`serveruri`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_get_latest_block_server(`serveruri`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_get_transaction_summaries(uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_get_transaction_summaries(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_get_value_transfers(`recentVtsToRetrive`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_get_value_transfers(`recentVtsToRetrive`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_get_zennies_for_zingo_donation_address(uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_get_zennies_for_zingo_donation_address(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_init_from_b64(`serveruri`: RustBuffer.ByValue,`datab64`: RustBuffer.ByValue,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_init_from_b64(`serveruri`: RustBuffer.ByValue,`datab64`: RustBuffer.ByValue,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_init_from_seed(`serveruri`: RustBuffer.ByValue,`seed`: RustBuffer.ByValue,`birthday`: Long,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_init_from_seed(`serveruri`: RustBuffer.ByValue,`seed`: RustBuffer.ByValue,`birthday`: Long,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_init_from_ufvk(`serveruri`: RustBuffer.ByValue,`ufvk`: RustBuffer.ByValue,`birthday`: Long,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_init_from_ufvk(`serveruri`: RustBuffer.ByValue,`ufvk`: RustBuffer.ByValue,`birthday`: Long,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_init_logging(uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_init_logging(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_init_new(`serveruri`: RustBuffer.ByValue,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_init_new(`serveruri`: RustBuffer.ByValue,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_save_to_b64(uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_save_to_b64(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_fn_func_set_crypto_default_provider_to_ring(uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_set_crypto_default_provider_to_ring(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun ffi_zingolib_rustbuffer_alloc(`size`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rustbuffer_alloc(`size`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun ffi_zingolib_rustbuffer_from_bytes(`bytes`: ForeignBytes.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rustbuffer_from_bytes(`bytes`: ForeignBytes.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun ffi_zingolib_rustbuffer_free(`buf`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rustbuffer_free(`buf`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): Unit
-fun ffi_zingolib_rustbuffer_reserve(`buf`: RustBuffer.ByValue,`additional`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rustbuffer_reserve(`buf`: RustBuffer.ByValue,`additional`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun ffi_zingolib_rust_future_poll_u8(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_u8(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_u8(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_u8(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_u8(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_u8(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_u8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_u8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Byte
-fun ffi_zingolib_rust_future_poll_i8(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_i8(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_i8(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_i8(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_i8(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_i8(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_i8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_i8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Byte
-fun ffi_zingolib_rust_future_poll_u16(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_u16(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_u16(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_u16(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_u16(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_u16(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_u16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_u16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Short
-fun ffi_zingolib_rust_future_poll_i16(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_i16(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_i16(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_i16(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_i16(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_i16(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_i16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_i16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Short
-fun ffi_zingolib_rust_future_poll_u32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_u32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_u32(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_u32(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_u32(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_u32(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_u32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_u32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Int
-fun ffi_zingolib_rust_future_poll_i32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_i32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_i32(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_i32(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_i32(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_i32(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_i32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_i32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Int
-fun ffi_zingolib_rust_future_poll_u64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_u64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_u64(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_u64(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_u64(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_u64(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_u64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_u64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Long
-fun ffi_zingolib_rust_future_poll_i64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_i64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_i64(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_i64(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_i64(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_i64(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_i64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_i64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Long
-fun ffi_zingolib_rust_future_poll_f32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_f32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_f32(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_f32(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_f32(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_f32(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_f32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_f32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Float
-fun ffi_zingolib_rust_future_poll_f64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_f64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_f64(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_f64(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_f64(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_f64(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_f64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_f64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Double
-fun ffi_zingolib_rust_future_poll_pointer(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_pointer(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_pointer(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_pointer(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_pointer(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_pointer(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_pointer(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_pointer(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Pointer
-fun ffi_zingolib_rust_future_poll_rust_buffer(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_rust_buffer(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_rust_buffer(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_rust_buffer(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_rust_buffer(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_rust_buffer(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_rust_buffer(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_rust_buffer(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun ffi_zingolib_rust_future_poll_void(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
+fun ffi_zingolib_android_rust_future_poll_void(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_cancel_void(`handle`: Long,
+fun ffi_zingolib_android_rust_future_cancel_void(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_free_void(`handle`: Long,
+fun ffi_zingolib_android_rust_future_free_void(`handle`: Long,
 ): Unit
-fun ffi_zingolib_rust_future_complete_void(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+fun ffi_zingolib_android_rust_future_complete_void(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
 ): Unit
 
 }
@@ -968,50 +968,50 @@ private fun uniffiCheckContractApiVersion(lib: IntegrityCheckingUniffiLib) {
     // Get the bindings contract version from our ComponentInterface
     val bindings_contract_version = 29
     // Get the scaffolding contract version by calling the into the dylib
-    val scaffolding_contract_version = lib.ffi_zingolib_uniffi_contract_version()
+    val scaffolding_contract_version = lib.ffi_zingolib_android_uniffi_contract_version()
     if (bindings_contract_version != scaffolding_contract_version) {
         throw RuntimeException("UniFFI contract version mismatch: try cleaning and rebuilding your project")
     }
 }
 @Suppress("UNUSED_PARAMETER")
 private fun uniffiCheckApiChecksums(lib: IntegrityCheckingUniffiLib) {
-    if (lib.uniffi_zingolib_checksum_func_execute_command() != 25289.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_execute_command() != 27612.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_get_developer_donation_address() != 43331.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_get_developer_donation_address() != 11347.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_get_latest_block_server() != 25905.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_get_latest_block_server() != 37988.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_get_transaction_summaries() != 62442.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_get_transaction_summaries() != 61178.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_get_value_transfers() != 53689.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_get_value_transfers() != 65476.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_get_zennies_for_zingo_donation_address() != 59377.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_get_zennies_for_zingo_donation_address() != 6337.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_init_from_b64() != 27742.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_init_from_b64() != 2738.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_init_from_seed() != 20044.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_init_from_seed() != 2241.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_init_from_ufvk() != 44363.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_init_from_ufvk() != 53969.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_init_logging() != 35258.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_init_logging() != 61647.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_init_new() != 37954.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_init_new() != 28063.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_save_to_b64() != 24188.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_save_to_b64() != 4446.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_checksum_func_set_crypto_default_provider_to_ring() != 1370.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_set_crypto_default_provider_to_ring() != 27392.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
 }
@@ -1197,7 +1197,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
 } fun `executeCommand`(`cmd`: kotlin.String, `args`: kotlin.String): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_execute_command(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_execute_command(
         FfiConverterString.lower(`cmd`),FfiConverterString.lower(`args`),_status)
 }
     )
@@ -1206,7 +1206,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `getDeveloperDonationAddress`(): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_get_developer_donation_address(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_get_developer_donation_address(
         _status)
 }
     )
@@ -1215,7 +1215,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `getLatestBlockServer`(`serveruri`: kotlin.String): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_get_latest_block_server(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_get_latest_block_server(
         FfiConverterString.lower(`serveruri`),_status)
 }
     )
@@ -1224,7 +1224,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `getTransactionSummaries`(): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_get_transaction_summaries(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_get_transaction_summaries(
         _status)
 }
     )
@@ -1233,7 +1233,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `getValueTransfers`(`recentVtsToRetrive`: kotlin.String): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_get_value_transfers(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_get_value_transfers(
         FfiConverterString.lower(`recentVtsToRetrive`),_status)
 }
     )
@@ -1242,7 +1242,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `getZenniesForZingoDonationAddress`(): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_get_zennies_for_zingo_donation_address(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_get_zennies_for_zingo_donation_address(
         _status)
 }
     )
@@ -1251,7 +1251,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `initFromB64`(`serveruri`: kotlin.String, `datab64`: kotlin.String, `datadir`: kotlin.String, `chainhint`: kotlin.String, `monitorMempool`: kotlin.Boolean): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_init_from_b64(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_init_from_b64(
         FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`datab64`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),FfiConverterBoolean.lower(`monitorMempool`),_status)
 }
     )
@@ -1260,7 +1260,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `initFromSeed`(`serveruri`: kotlin.String, `seed`: kotlin.String, `birthday`: kotlin.ULong, `datadir`: kotlin.String, `chainhint`: kotlin.String, `monitorMempool`: kotlin.Boolean): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_init_from_seed(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_init_from_seed(
         FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`seed`),FfiConverterULong.lower(`birthday`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),FfiConverterBoolean.lower(`monitorMempool`),_status)
 }
     )
@@ -1269,7 +1269,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `initFromUfvk`(`serveruri`: kotlin.String, `ufvk`: kotlin.String, `birthday`: kotlin.ULong, `datadir`: kotlin.String, `chainhint`: kotlin.String, `monitorMempool`: kotlin.Boolean): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_init_from_ufvk(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_init_from_ufvk(
         FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`ufvk`),FfiConverterULong.lower(`birthday`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),FfiConverterBoolean.lower(`monitorMempool`),_status)
 }
     )
@@ -1278,7 +1278,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `initLogging`(): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_init_logging(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_init_logging(
         _status)
 }
     )
@@ -1287,7 +1287,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `initNew`(`serveruri`: kotlin.String, `datadir`: kotlin.String, `chainhint`: kotlin.String, `monitorMempool`: kotlin.Boolean): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_init_new(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_init_new(
         FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),FfiConverterBoolean.lower(`monitorMempool`),_status)
 }
     )
@@ -1296,7 +1296,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `saveToB64`(): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_save_to_b64(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_save_to_b64(
         _status)
 }
     )
@@ -1305,7 +1305,7 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
  fun `setCryptoDefaultProviderToRing`(): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
-    UniffiLib.INSTANCE.uniffi_zingolib_fn_func_set_crypto_default_provider_to_ring(
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_set_crypto_default_provider_to_ring(
         _status)
 }
     )

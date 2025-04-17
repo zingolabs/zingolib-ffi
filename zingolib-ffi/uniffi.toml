@@ -1,5 +1,5 @@
 [bindings.kotlin]
-package_name = "org.zingolabs.zingolib-android"
+package_name = "org.zingolabs.zingolib_android"
 cdylib_name = "zingolib_android"
 android = true
 generate_immutable_records = true

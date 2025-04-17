@@ -6,10 +6,30 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
+pluginManagement {
+    repositories {
+        google()
+        gradlePluginPortal()
+        mavenCentral()
+    }
+    plugins {
+        id("com.android.library") version "8.2.2"
+        id("org.jetbrains.kotlin.android") version "1.9.22"
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
 plugins {
-    // Apply the foojay-resolver plugin to allow automatic download of JDKs
+    // Keep the Foojay plugin if you're managing JDKs automatically
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
 }
 
-rootProject.name = "zingolib-android"
+rootProject.name = "zingolib_android"
+
 include("lib")

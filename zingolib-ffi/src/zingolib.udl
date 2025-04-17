@@ -1,4 +1,4 @@
-namespace zingolib_android {
+namespace zingolib {
   string init_logging();
   string execute_command(string cmd, string args);
   string init_new(

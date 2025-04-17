@@ -28,7 +28,7 @@ uniffi_build = { version = "0.27", features = ["builtin-bindgen"] }
 
 [lib]
 crate-type = ["cdylib", "staticlib"]
-name = "zingolib"
+name = "zingolib_android"
 
 [[bin]]
 name = "uniffi-bindgen"
