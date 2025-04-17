@@ -1,0 +1,78 @@
+[config]
+skip_core_tasks = true
+
+[env]
+ANDROID_SDK_ROOT = { value = "${ANDROID_SDK_ROOT}", default = "${HOME}/Android/Sdk" }
+ANDROID_NDK = { script = [
+    "ndk_path=$(ls -d ${ANDROID_SDK_ROOT}/ndk/* | sort -V | tail -n1)",
+    "echo ${ndk_path}",
+] }
+ANDROID_NDK_HOME = "${ANDROID_NDK}"
+ANDROID_NDK_ROOT = "${ANDROID_NDK}"
+BINDGEN_EXTRA_CLANG_ARGS = "--sysroot=${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
+
+[tasks.generate-uniffi]
+description = "Generate Kotlin bindings using UniFFI"
+command = "cargo"
+args = [
+    "run",
+    "--release",
+    "--features=uniffi/cli",
+    "--bin",
+    "uniffi-bindgen",
+    "generate",
+    "./src/zingolib.udl",
+    "--language",
+    "kotlin",
+    "--out-dir",
+    "../zingolib-android/lib/src/main/kotlin/",
+]
+
+[tasks.build-ndk]
+description = "Compile Rust library for all Android ABIs"
+command = "cargo"
+args = [
+    "ndk",
+    "-t",
+    "arm64-v8a",
+    "-t",
+    "armeabi-v7a",
+    "-t",
+    "x86",
+    "-t",
+    "x86_64",
+    "build",
+    "--release",
+    "-Z",
+    "build-std",
+]
+
+[tasks.strip-libs]
+description = "Strip debug symbols from generated .so files"
+script = [
+    "llvm-strip --strip-all ../target/aarch64-linux-android/release/libzingolib.so",
+    "llvm-strip --strip-all ../target/armv7-linux-androideabi/release/libzingolib.so",
+    "llvm-strip --strip-all ../target/i686-linux-android/release/libzingolib.so",
+    "llvm-strip --strip-all ../target/x86_64-linux-android/release/libzingolib.so",
+    "llvm-objcopy --remove-section .comment ../target/aarch64-linux-android/release/libzingolib.so",
+    "llvm-objcopy --remove-section .comment ../target/armv7-linux-androideabi/release/libzingolib.so",
+    "llvm-objcopy --remove-section .comment ../target/i686-linux-android/release/libzingolib.so",
+    "llvm-objcopy --remove-section .comment ../target/x86_64-linux-android/release/libzingolib.so",
+]
+
+[tasks.copy-libs]
+description = "Copy compiled .so files into jniLibs folder"
+script = [
+    "mkdir -p ../zingolib-android/lib/src/main/jniLibs/arm64-v8a",
+    "mkdir -p ../zingolib-android/lib/src/main/jniLibs/armeabi-v7a",
+    "mkdir -p ../zingolib-android/lib/src/main/jniLibs/x86",
+    "mkdir -p ../zingolib-android/lib/src/main/jniLibs/x86_64",
+    "cp ../target/aarch64-linux-android/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/arm64-v8a/zingolib.so",
+    "cp ../target/armv7-linux-androideabi/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/armeabi-v7a/zingolib.so",
+    "cp ../target/i686-linux-android/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/x86/zingolib.so",
+    "cp ../target/x86_64-linux-android/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/x86_64/zingolib.so",
+]
+
+[tasks.android]
+description = "Full Android build: bindings, compile, strip, and copy"
+dependencies = ["generate-uniffi", "build-ndk", "strip-libs", "copy-libs"]
