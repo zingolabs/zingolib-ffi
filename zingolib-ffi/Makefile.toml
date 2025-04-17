@@ -50,14 +50,14 @@ args = [
 [tasks.strip-libs]
 description = "Strip debug symbols from generated .so files"
 script = [
-    "llvm-strip --strip-all ../target/aarch64-linux-android/release/libzingolib.so",
-    "llvm-strip --strip-all ../target/armv7-linux-androideabi/release/libzingolib.so",
-    "llvm-strip --strip-all ../target/i686-linux-android/release/libzingolib.so",
-    "llvm-strip --strip-all ../target/x86_64-linux-android/release/libzingolib.so",
-    "llvm-objcopy --remove-section .comment ../target/aarch64-linux-android/release/libzingolib.so",
-    "llvm-objcopy --remove-section .comment ../target/armv7-linux-androideabi/release/libzingolib.so",
-    "llvm-objcopy --remove-section .comment ../target/i686-linux-android/release/libzingolib.so",
-    "llvm-objcopy --remove-section .comment ../target/x86_64-linux-android/release/libzingolib.so",
+    "llvm-strip --strip-all ../target/aarch64-linux-android/release/libzingolib_android.so",
+    "llvm-strip --strip-all ../target/armv7-linux-androideabi/release/libzingolib_android.so",
+    "llvm-strip --strip-all ../target/i686-linux-android/release/libzingolib_android.so",
+    "llvm-strip --strip-all ../target/x86_64-linux-android/release/libzingolib_android.so",
+    "llvm-objcopy --remove-section .comment ../target/aarch64-linux-android/release/libzingolib_android.so",
+    "llvm-objcopy --remove-section .comment ../target/armv7-linux-androideabi/release/libzingolib_android.so",
+    "llvm-objcopy --remove-section .comment ../target/i686-linux-android/release/libzingolib_android.so",
+    "llvm-objcopy --remove-section .comment ../target/x86_64-linux-android/release/libzingolib_android.so",
 ]
 
 [tasks.copy-libs]
@@ -67,10 +67,10 @@ script = [
     "mkdir -p ../zingolib-android/lib/src/main/jniLibs/armeabi-v7a",
     "mkdir -p ../zingolib-android/lib/src/main/jniLibs/x86",
     "mkdir -p ../zingolib-android/lib/src/main/jniLibs/x86_64",
-    "cp ../target/aarch64-linux-android/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/arm64-v8a/zingolib.so",
-    "cp ../target/armv7-linux-androideabi/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/armeabi-v7a/zingolib.so",
-    "cp ../target/i686-linux-android/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/x86/zingolib.so",
-    "cp ../target/x86_64-linux-android/release/libzingolib.so ../zingolib-android/lib/src/main/jniLibs/x86_64/zingolib.so",
+    "cp ../target/aarch64-linux-android/release/libzingolib_android.so ../zingolib-android/lib/src/main/jniLibs/arm64-v8a/libzingolib_android.so",
+    "cp ../target/armv7-linux-androideabi/release/libzingolib_android.so ../zingolib-android/lib/src/main/jniLibs/armeabi-v7a/libzingolib_android.so",
+    "cp ../target/i686-linux-android/release/libzingolib_android.so ../zingolib-android/lib/src/main/jniLibs/x86/libzingolib_android.so",
+    "cp ../target/x86_64-linux-android/release/libzingolib_android.so ../zingolib-android/lib/src/main/jniLibs/x86_64/libzingolib_android.so",
 ]
 
 [tasks.android]

@@ -6,3 +6,11 @@ build
 
 # Ignore jniLibs
 /android/app/src/main/jniLibs/
+
+# Local settings
+local.properties
+
+# Heap memory dumps
+*.hprof
+
+.idea/
