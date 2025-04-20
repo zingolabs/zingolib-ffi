@@ -737,6 +737,8 @@ internal interface UniffiForeignFutureCompleteVoid : com.sun.jna.Callback {
 
 
 
+
+
 // For large crates we prevent `MethodTooLargeException` (see #2340)
 // N.B. the name of the extension is very misleading, since it is 
 // rather `InterfaceTooLargeException`, caused by too many methods 
@@ -773,6 +775,8 @@ fun uniffi_zingolib_android_checksum_func_init_from_ufvk(
 fun uniffi_zingolib_android_checksum_func_init_logging(
 ): Short
 fun uniffi_zingolib_android_checksum_func_init_new(
+): Short
+fun uniffi_zingolib_android_checksum_func_poll_sync(
 ): Short
 fun uniffi_zingolib_android_checksum_func_save_to_b64(
 ): Short
@@ -831,19 +835,21 @@ fun uniffi_zingolib_android_fn_func_get_latest_block_server(`serveruri`: RustBuf
 ): RustBuffer.ByValue
 fun uniffi_zingolib_android_fn_func_get_transaction_summaries(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_android_fn_func_get_value_transfers(`recentVtsToRetrive`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_get_value_transfers(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
 fun uniffi_zingolib_android_fn_func_get_zennies_for_zingo_donation_address(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_android_fn_func_init_from_b64(`serveruri`: RustBuffer.ByValue,`datab64`: RustBuffer.ByValue,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_init_from_b64(`serveruri`: RustBuffer.ByValue,`datab64`: RustBuffer.ByValue,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_android_fn_func_init_from_seed(`serveruri`: RustBuffer.ByValue,`seed`: RustBuffer.ByValue,`birthday`: Long,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_init_from_seed(`serveruri`: RustBuffer.ByValue,`seed`: RustBuffer.ByValue,`birthday`: Long,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_android_fn_func_init_from_ufvk(`serveruri`: RustBuffer.ByValue,`ufvk`: RustBuffer.ByValue,`birthday`: Long,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_init_from_ufvk(`serveruri`: RustBuffer.ByValue,`ufvk`: RustBuffer.ByValue,`birthday`: Long,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
 fun uniffi_zingolib_android_fn_func_init_logging(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
-fun uniffi_zingolib_android_fn_func_init_new(`serveruri`: RustBuffer.ByValue,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,`monitorMempool`: Byte,uniffi_out_err: UniffiRustCallStatus, 
+fun uniffi_zingolib_android_fn_func_init_new(`serveruri`: RustBuffer.ByValue,`datadir`: RustBuffer.ByValue,`chainhint`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+): RustBuffer.ByValue
+fun uniffi_zingolib_android_fn_func_poll_sync(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
 fun uniffi_zingolib_android_fn_func_save_to_b64(uniffi_out_err: UniffiRustCallStatus, 
 ): RustBuffer.ByValue
@@ -987,25 +993,28 @@ private fun uniffiCheckApiChecksums(lib: IntegrityCheckingUniffiLib) {
     if (lib.uniffi_zingolib_android_checksum_func_get_transaction_summaries() != 61178.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_android_checksum_func_get_value_transfers() != 65476.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_get_value_transfers() != 16447.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_zingolib_android_checksum_func_get_zennies_for_zingo_donation_address() != 6337.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_android_checksum_func_init_from_b64() != 2738.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_init_from_b64() != 44573.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_android_checksum_func_init_from_seed() != 2241.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_init_from_seed() != 20521.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_android_checksum_func_init_from_ufvk() != 53969.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_init_from_ufvk() != 29600.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_zingolib_android_checksum_func_init_logging() != 61647.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
-    if (lib.uniffi_zingolib_android_checksum_func_init_new() != 28063.toShort()) {
+    if (lib.uniffi_zingolib_android_checksum_func_init_new() != 33801.toShort()) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if (lib.uniffi_zingolib_android_checksum_func_poll_sync() != 12905.toShort()) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if (lib.uniffi_zingolib_android_checksum_func_save_to_b64() != 4446.toShort()) {
@@ -1119,29 +1128,6 @@ public object FfiConverterULong: FfiConverter<ULong, Long> {
 /**
  * @suppress
  */
-public object FfiConverterBoolean: FfiConverter<Boolean, Byte> {
-    override fun lift(value: Byte): Boolean {
-        return value.toInt() != 0
-    }
-
-    override fun read(buf: ByteBuffer): Boolean {
-        return lift(buf.get())
-    }
-
-    override fun lower(value: Boolean): Byte {
-        return if (value) 1.toByte() else 0.toByte()
-    }
-
-    override fun allocationSize(value: Boolean) = 1UL
-
-    override fun write(value: Boolean, buf: ByteBuffer) {
-        buf.put(lower(value))
-    }
-}
-
-/**
- * @suppress
- */
 public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
     // Note: we don't inherit from FfiConverterRustBuffer, because we use a
     // special encoding when lowering/lifting.  We can use `RustBuffer.len` to
@@ -1230,11 +1216,11 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
     )
     }
     
- fun `getValueTransfers`(`recentVtsToRetrive`: kotlin.String): kotlin.String {
+ fun `getValueTransfers`(): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
     UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_get_value_transfers(
-        FfiConverterString.lower(`recentVtsToRetrive`),_status)
+        _status)
 }
     )
     }
@@ -1248,29 +1234,29 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
     )
     }
     
- fun `initFromB64`(`serveruri`: kotlin.String, `datab64`: kotlin.String, `datadir`: kotlin.String, `chainhint`: kotlin.String, `monitorMempool`: kotlin.Boolean): kotlin.String {
+ fun `initFromB64`(`serveruri`: kotlin.String, `datab64`: kotlin.String, `datadir`: kotlin.String, `chainhint`: kotlin.String): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
     UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_init_from_b64(
-        FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`datab64`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),FfiConverterBoolean.lower(`monitorMempool`),_status)
+        FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`datab64`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),_status)
 }
     )
     }
     
- fun `initFromSeed`(`serveruri`: kotlin.String, `seed`: kotlin.String, `birthday`: kotlin.ULong, `datadir`: kotlin.String, `chainhint`: kotlin.String, `monitorMempool`: kotlin.Boolean): kotlin.String {
+ fun `initFromSeed`(`serveruri`: kotlin.String, `seed`: kotlin.String, `birthday`: kotlin.ULong, `datadir`: kotlin.String, `chainhint`: kotlin.String): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
     UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_init_from_seed(
-        FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`seed`),FfiConverterULong.lower(`birthday`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),FfiConverterBoolean.lower(`monitorMempool`),_status)
+        FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`seed`),FfiConverterULong.lower(`birthday`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),_status)
 }
     )
     }
     
- fun `initFromUfvk`(`serveruri`: kotlin.String, `ufvk`: kotlin.String, `birthday`: kotlin.ULong, `datadir`: kotlin.String, `chainhint`: kotlin.String, `monitorMempool`: kotlin.Boolean): kotlin.String {
+ fun `initFromUfvk`(`serveruri`: kotlin.String, `ufvk`: kotlin.String, `birthday`: kotlin.ULong, `datadir`: kotlin.String, `chainhint`: kotlin.String): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
     UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_init_from_ufvk(
-        FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`ufvk`),FfiConverterULong.lower(`birthday`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),FfiConverterBoolean.lower(`monitorMempool`),_status)
+        FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`ufvk`),FfiConverterULong.lower(`birthday`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),_status)
 }
     )
     }
@@ -1284,11 +1270,20 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
     )
     }
     
- fun `initNew`(`serveruri`: kotlin.String, `datadir`: kotlin.String, `chainhint`: kotlin.String, `monitorMempool`: kotlin.Boolean): kotlin.String {
+ fun `initNew`(`serveruri`: kotlin.String, `datadir`: kotlin.String, `chainhint`: kotlin.String): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
     UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_init_new(
-        FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),FfiConverterBoolean.lower(`monitorMempool`),_status)
+        FfiConverterString.lower(`serveruri`),FfiConverterString.lower(`datadir`),FfiConverterString.lower(`chainhint`),_status)
+}
+    )
+    }
+    
+ fun `pollSync`(): kotlin.String {
+            return FfiConverterString.lift(
+    uniffiRustCall() { _status ->
+    UniffiLib.INSTANCE.uniffi_zingolib_android_fn_func_poll_sync(
+        _status)
 }
     )
     }
