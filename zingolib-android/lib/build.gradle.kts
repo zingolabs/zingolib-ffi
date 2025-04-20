@@ -35,7 +35,10 @@ android {
 }
 
 dependencies {
+    // This dependency is exported to consumers, that is to say found on their compile classpath.
+    api(libs.commons.math3)
     // Native interop (optional for tests using JNA or UniFFI)
+    // Note that the `aar` here is important, as otherwise it won't be able to find some .so files.
     implementation("net.java.dev.jna:jna:5.17.0@aar")
 
     // Android test dependencies
