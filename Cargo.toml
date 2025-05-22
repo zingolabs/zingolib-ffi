@@ -3,7 +3,5 @@ members = ["zingolib-ffi"]
 resolver = "2"
 
 [workspace.dependencies]
-zingolib = { git = "https://github.com/zingolabs/zingolib", default-features = true, branch = "dev", features = [
-    "test-elevation",
-] }
+zingolib = { path = "/home/myuser/zingolib/zingolib" }
 zcash_primitives = "0.22.0"
