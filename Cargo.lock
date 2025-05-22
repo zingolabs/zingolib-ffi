@@ -5071,6 +5071,7 @@ dependencies = [
  "json",
  "lazy_static",
  "log",
+ "pepper-sync",
  "rustls",
  "tokio",
  "uniffi",

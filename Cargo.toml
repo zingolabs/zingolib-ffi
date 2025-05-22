@@ -4,4 +4,5 @@ resolver = "2"
 
 [workspace.dependencies]
 zingolib = { git = "https://github.com/zingolabs/zingolib.git", branch = "dev" }
+pepper-sync = { git = "https://github.com/zingolabs/zingolib.git", branch = "dev", package = "pepper-sync" }
 zcash_primitives = "0.22.0"

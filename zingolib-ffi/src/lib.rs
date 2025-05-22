@@ -11,12 +11,14 @@ use log::Level;
 
 use base64::engine::general_purpose::STANDARD;
 use base64::Engine;
+use pepper_sync::sync::{SyncConfig, TransparentAddressDiscovery};
 use rustls::crypto::ring::default_provider;
 use rustls::crypto::CryptoProvider;
 use std::sync::Mutex;
 use zcash_primitives::consensus::BlockHeight;
 use zingolib::config::{construct_lightwalletd_uri, ChainType, RegtestNetwork, ZingoConfig};
 use zingolib::data::PollReport;
+use zingolib::wallet::WalletSettings;
 use zingolib::{commands, lightclient::LightClient, wallet::LightWallet, wallet::WalletBase};
 
 // We'll use a MUTEX to store a global lightclient instance,
@@ -46,13 +48,21 @@ fn construct_uri_load_config(
         "regtest" => ChainType::Regtest(RegtestNetwork::all_upgrades_active()),
         _ => return Err("Error: Not a valid chain hint!".to_string()),
     };
-    let mut config =
-        match zingolib::config::load_clientconfig(lightwalletd_uri.clone(), None, chaintype) {
-            Ok(c) => c,
-            Err(e) => {
-                return Err(format!("Error: Config load: {}", e));
-            }
-        };
+    let mut config = match zingolib::config::load_clientconfig(
+        lightwalletd_uri.clone(),
+        None,
+        chaintype,
+        WalletSettings {
+            sync_config: SyncConfig {
+                transparent_address_discovery: TransparentAddressDiscovery::minimal(),
+            },
+        },
+    ) {
+        Ok(c) => c,
+        Err(e) => {
+            return Err(format!("Error: Config load: {}", e));
+        }
+    };
     config.set_data_dir(data_dir);
 
     Ok((config, lightwalletd_uri))
@@ -114,6 +124,11 @@ pub fn init_from_seed(
         config.chain,
         WalletBase::MnemonicPhrase(seed),
         BlockHeight::from_u32(birthday as u32),
+        WalletSettings {
+            sync_config: SyncConfig {
+                transparent_address_discovery: TransparentAddressDiscovery::minimal(),
+            },
+        },
     ) {
         Ok(w) => w,
         Err(e) => return format!("Error: {e}"),
@@ -144,6 +159,11 @@ pub fn init_from_ufvk(
         config.chain,
         WalletBase::Ufvk(ufvk),
         BlockHeight::from_u32(birthday as u32),
+        WalletSettings {
+            sync_config: SyncConfig {
+                transparent_address_discovery: TransparentAddressDiscovery::minimal(),
+            },
+        },
     ) {
         Ok(w) => w,
         Err(e) => return format!("Error: {e}"),
