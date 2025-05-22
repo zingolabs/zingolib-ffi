@@ -5,4 +5,4 @@
 
 To generate new uniffi bindings:
 
-`docker build .`
+docker build -f buildcontainer -t buildcontainer . && docker run -v `pwd`:/home/myuser/zingolib-ffi buildcontainer
