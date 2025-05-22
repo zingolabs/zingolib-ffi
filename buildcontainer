@@ -1,0 +1,33 @@
+FROM ubuntu:22.04 AS android-stage
+
+# Set environment variables for Android SDK, and cargo
+ENV CARGO_HOME=/usr/local/cargo
+ENV ANDROID_HOME=/usr/local/android-sdk
+ENV PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:/usr/local/bin:$CARGO_HOME/bin:/usr/local/bin
+
+# Install Android SDK tools and Java (required for Android SDK)
+RUN apt-get update && \
+    apt-get install -y \
+    build-essential \
+    openjdk-17-jdk \
+    curl \
+    wget \
+    unzip \
+    sudo && \
+    wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip && \
+    unzip cmdline-tools.zip -d ./temp && \
+    mkdir -p /usr/local/android-sdk/cmdline-tools/latest && \
+    mv ./temp/cmdline-tools/* /usr/local/android-sdk/cmdline-tools/latest && \
+    rm -rf ./temp && \
+    rm cmdline-tools.zip
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN rustup update
+
+# Accept licenses and install basic Android SDK components
+RUN yes | sdkmanager --licenses && \
+    sdkmanager "platform-tools" "build-tools;30.0.3" "platforms;android-30"
+
+RUN cargo install cargo-make
+WORKDIR /zingolib-ffi
+CMD ["cargo", "make"]
