@@ -529,6 +529,7 @@ dependencies = [
 [[package]]
 name = "build_utils"
 version = "0.1.0"
+source = "git+https://github.com/zingolabs/zingolib.git?branch=dev#dc0ca86311fe8154ce88b0228b1323ac5e1b6cc6"
 
 [[package]]
 name = "bumpalo"
@@ -2227,6 +2228,7 @@ dependencies = [
 [[package]]
 name = "pepper-sync"
 version = "0.1.0"
+source = "git+https://github.com/zingolabs/zingolib.git?branch=dev#dc0ca86311fe8154ce88b0228b1323ac5e1b6cc6"
 dependencies = [
  "bip32",
  "byteorder",
@@ -4949,6 +4951,7 @@ dependencies = [
 [[package]]
 name = "zingo-memo"
 version = "0.1.0"
+source = "git+https://github.com/zingolabs/zingolib.git?branch=dev#dc0ca86311fe8154ce88b0228b1323ac5e1b6cc6"
 dependencies = [
  "zcash_address",
  "zcash_client_backend",
@@ -4960,6 +4963,7 @@ dependencies = [
 [[package]]
 name = "zingo-netutils"
 version = "0.1.0"
+source = "git+https://github.com/zingolabs/zingolib.git?branch=dev#dc0ca86311fe8154ce88b0228b1323ac5e1b6cc6"
 dependencies = [
  "http",
  "http-body",
@@ -4979,6 +4983,7 @@ dependencies = [
 [[package]]
 name = "zingo-price"
 version = "0.1.0"
+source = "git+https://github.com/zingolabs/zingolib.git?branch=dev#dc0ca86311fe8154ce88b0228b1323ac5e1b6cc6"
 dependencies = [
  "byteorder",
  "reqwest",
@@ -4991,6 +4996,7 @@ dependencies = [
 [[package]]
 name = "zingo-status"
 version = "0.1.0"
+source = "git+https://github.com/zingolabs/zingolib.git?branch=dev#dc0ca86311fe8154ce88b0228b1323ac5e1b6cc6"
 dependencies = [
  "byteorder",
  "zcash_primitives",
@@ -4999,6 +5005,7 @@ dependencies = [
 [[package]]
 name = "zingolib"
 version = "0.2.0"
+source = "git+https://github.com/zingolabs/zingolib.git?branch=dev#dc0ca86311fe8154ce88b0228b1323ac5e1b6cc6"
 dependencies = [
  "append-only-vec",
  "bech32",
