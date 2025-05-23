@@ -11,12 +11,14 @@ use log::Level;
 
 use base64::engine::general_purpose::STANDARD;
 use base64::Engine;
-use pepper_sync::sync::{SyncConfig, TransparentAddressDiscovery};
 use rustls::crypto::ring::default_provider;
 use rustls::crypto::CryptoProvider;
 use std::sync::Mutex;
 use zcash_primitives::consensus::BlockHeight;
-use zingolib::config::{construct_lightwalletd_uri, ChainType, RegtestNetwork, ZingoConfig};
+use zingolib::config::{
+    construct_lightwalletd_uri, ChainType, RegtestNetwork, SyncConfig, TransparentAddressDiscovery,
+    ZingoConfig,
+};
 use zingolib::data::PollReport;
 use zingolib::wallet::WalletSettings;
 use zingolib::{commands, lightclient::LightClient, wallet::LightWallet, wallet::WalletBase};
