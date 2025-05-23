@@ -2,7 +2,7 @@
 skip_core_tasks = true
 
 [env]
-ANDROID_SDK_ROOT = { value = "${ANDROID_SDK_ROOT}", default = "${HOME}/Android/Sdk" }
+ANDROID_SDK_ROOT = { value = "${HOME}/Android/Sdk" }
 ANDROID_NDK = { script = [
     "ndk_path=$(ls -d ${ANDROID_SDK_ROOT}/ndk/* | sort -V | tail -n1)",
     "echo ${ndk_path}",
