@@ -14,7 +14,7 @@ BINDGEN_EXTRA_CLANG_ARGS = "--sysroot=${ANDROID_NDK}/toolchains/llvm/prebuilt/li
 [tasks.clean-generated-sources]
 description = "Clean generated sources"
 script = [
-    "rm ../zingolib-android/lib/src/main/kotlin/org/zingolabs/zingolib_android/zingolib.kt",
+    "rm -f ../zingolib-android/lib/src/main/kotlin/org/zingolabs/zingolib_android/zingolib.kt",
 ]
 
 [tasks.generate-uniffi]

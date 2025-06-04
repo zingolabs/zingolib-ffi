@@ -1,3 +1,4 @@
 target/
 
 /**/*.so
+zingolib_android/zingolib.kt
