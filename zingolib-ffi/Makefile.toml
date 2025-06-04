@@ -36,6 +36,14 @@ args = [
 
 [tasks.build-ndk]
 description = "Compile Rust library for all Android ABIs"
+dependencies = [
+    "install_aarch64-linux-android",
+    "install_armv7-linux-androideabi",
+    "install_i686-linux-android",
+    "install_x86_64-linux-android",
+    "install_bindgen-cli"
+]
+
 command = "cargo"
 args = [
     "ndk",
@@ -51,6 +59,52 @@ args = [
     "--release",
     "-Z",
     "build-std",
+]
+
+[tasks.install_x86_64-linux-android]
+description = "Add x86_64-linux-android"
+command = "rustup"
+args = [
+"target",
+"install",
+"x86_64-linux-android"
+]
+
+[tasks.install_aarch64-linux-android]
+description = "Add aarch64-linux-android"
+command = "rustup"
+args = [
+"target",
+"install",
+"aarch64-linux-android"
+]
+
+[tasks.install_i686-linux-android]
+description = "Add i686-linux-android"
+command = "rustup"
+args = [
+"target",
+"install",
+"i686-linux-android"
+]
+
+[tasks.install_armv7-linux-androideabi]
+description = "Add armv7-linux-androideabi"
+command = "rustup"
+args = [
+"target",
+"install",
+"armv7-linux-androideabi"
+]
+
+[tasks.install_bindgen-cli]
+description = "Install bindgen-cli"
+command = "cargo"
+args = [
+"install",
+"--force",
+"--locked",
+"bindgen-cli"
 ]
 
 [tasks.strip-libs]
