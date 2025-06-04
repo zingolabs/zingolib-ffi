@@ -11,6 +11,12 @@ ANDROID_NDK_HOME = "${ANDROID_NDK}"
 ANDROID_NDK_ROOT = "${ANDROID_NDK}"
 BINDGEN_EXTRA_CLANG_ARGS = "--sysroot=${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-x86_64/sysroot"
 
+[tasks.clean-generated-sources]
+description = "Clean generated sources"
+script = [
+    "rm ../zingolib-android/lib/src/main/kotlin/org/zingolabs/zingolib_android/zingolib.kt",
+]
+
 [tasks.generate-uniffi]
 description = "Generate Kotlin bindings using UniFFI"
 command = "cargo"
@@ -75,4 +81,13 @@ script = [
 
 [tasks.android]
 description = "Full Android build: bindings, compile, strip, and copy"
-dependencies = ["generate-uniffi", "build-ndk", "strip-libs", "copy-libs"]
+dependencies = [
+    "clean-generated-sources",
+    "generate-uniffi",
+    "build-ndk",
+    "strip-libs",
+    "copy-libs",
+]
+
+[tasks.default]
+alias = "android"
