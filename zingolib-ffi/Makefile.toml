@@ -37,9 +37,6 @@ args = [
 [tasks.build-ndk]
 description = "Compile Rust library for all Android ABIs"
 dependencies = [
-    "install_aarch64-linux-android",
-    "install_armv7-linux-androideabi",
-    "install_i686-linux-android",
     "install_x86_64-linux-android",
     "install_bindgen-cli"
 ]
@@ -47,12 +44,6 @@ dependencies = [
 command = "cargo"
 args = [
     "ndk",
-    "-t",
-    "arm64-v8a",
-    "-t",
-    "armeabi-v7a",
-    "-t",
-    "x86",
     "-t",
     "x86_64",
     "build",
@@ -110,26 +101,14 @@ args = [
 [tasks.strip-libs]
 description = "Strip debug symbols from generated .so files"
 script = [
-    "llvm-strip --strip-all ../target/aarch64-linux-android/release/libzingolib_android.so",
-    "llvm-strip --strip-all ../target/armv7-linux-androideabi/release/libzingolib_android.so",
-    "llvm-strip --strip-all ../target/i686-linux-android/release/libzingolib_android.so",
     "llvm-strip --strip-all ../target/x86_64-linux-android/release/libzingolib_android.so",
-    "llvm-objcopy --remove-section .comment ../target/aarch64-linux-android/release/libzingolib_android.so",
-    "llvm-objcopy --remove-section .comment ../target/armv7-linux-androideabi/release/libzingolib_android.so",
-    "llvm-objcopy --remove-section .comment ../target/i686-linux-android/release/libzingolib_android.so",
     "llvm-objcopy --remove-section .comment ../target/x86_64-linux-android/release/libzingolib_android.so",
 ]
 
 [tasks.copy-libs]
 description = "Copy compiled .so files into jniLibs folder"
 script = [
-    "mkdir -p ../zingolib-android/lib/src/main/jniLibs/arm64-v8a",
-    "mkdir -p ../zingolib-android/lib/src/main/jniLibs/armeabi-v7a",
-    "mkdir -p ../zingolib-android/lib/src/main/jniLibs/x86",
     "mkdir -p ../zingolib-android/lib/src/main/jniLibs/x86_64",
-    "cp ../target/aarch64-linux-android/release/libzingolib_android.so ../zingolib-android/lib/src/main/jniLibs/arm64-v8a/libzingolib_android.so",
-    "cp ../target/armv7-linux-androideabi/release/libzingolib_android.so ../zingolib-android/lib/src/main/jniLibs/armeabi-v7a/libzingolib_android.so",
-    "cp ../target/i686-linux-android/release/libzingolib_android.so ../zingolib-android/lib/src/main/jniLibs/x86/libzingolib_android.so",
     "cp ../target/x86_64-linux-android/release/libzingolib_android.so ../zingolib-android/lib/src/main/jniLibs/x86_64/libzingolib_android.so",
 ]
 

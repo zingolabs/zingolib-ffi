@@ -32,6 +32,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    packagingOptions {
+        doNotStrip.add("**/*.so")
+    }
 }
 
 dependencies {
