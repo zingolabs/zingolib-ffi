@@ -5066,13 +5066,11 @@ version = "1.0.1"
 dependencies = [
  "android_logger",
  "base64",
- "camino",
  "http",
  "json",
  "lazy_static",
  "log",
  "rustls",
- "tokio",
  "uniffi",
  "uniffi_build",
  "zcash_primitives",
