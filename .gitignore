@@ -1,4 +1,20 @@
 target/
 
 /**/*.so
-zingolib_android/zingolib.kt
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+# Ignore jniLibs
+/android/app/src/main/jniLibs/
+
+# Local settings
+local.properties
+
+# Heap memory dumps
+*.hprof
+
+.idea/
