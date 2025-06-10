@@ -30,6 +30,7 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
 }
 
-rootProject.name = "zingolib_android"
+rootProject.name = "zingolib_ffi"
 
-include("lib")
+include(":zingolib-android")
+include(":zingolib-android:lib")
