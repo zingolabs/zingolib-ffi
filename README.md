@@ -3,6 +3,5 @@
 ⚠️ This repository is **work in progress** and is not yet ready for use.
 
 
-To generate new uniffi bindings:
-
-docker build -f buildcontainer -t buildcontainer . && docker run -v `pwd`:/home/myuser/zingolib-ffi buildcontainer
+1. pushd zingolib-ffi && makers && popd && ./gradlew check
+2. android-studio
