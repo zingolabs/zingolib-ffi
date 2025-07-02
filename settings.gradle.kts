@@ -13,8 +13,8 @@ pluginManagement {
         mavenCentral()
     }
     plugins {
-        id("com.android.library") version "8.2.2"
-        id("org.jetbrains.kotlin.android") version "2.0.21"
+        id("com.android.library") version "8.11.0"
+        id("org.jetbrains.kotlin.android") version "2.2.0"
     }
 }
 
@@ -26,8 +26,8 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    // Keep the Foojay plugin if you're managing JDKs automatically
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
+    // Keep the foojay plugin if you're managing JDKs automatically
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
 rootProject.name = "zingolib_ffi"
