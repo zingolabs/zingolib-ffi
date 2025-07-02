@@ -51,6 +51,32 @@ afterEvaluate {
                 groupId = "org.zingolabs"
                 artifactId = "zingolib-android"
                 version = "0.0.1"
+                pom {
+                    name.set("zingolib-android")
+                    description.set("Android bindings for zingolib")
+                    url.set("https://github.com/zingolabs/zingolib-ffi")
+
+                    licenses {
+                        license {
+                            name.set("MIT License")
+                            url.set("https://opensource.org/licenses/MIT")
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id.set("zancas")
+                            name.set("zancas")
+                            email.set("zancas@protonmail.com")
+                        }
+                    }
+
+                    scm {
+                        connection.set("scm:git:git://github.com/zingolabs/zingolib-ffi.git")
+                        developerConnection.set("scm:git:ssh://github.com/zingolabs/zingolib-ffi.git")
+                        url.set("https://github.com/zingolabs/zingolib-ffi")
+                    }
+                }
             }
         }
     }
