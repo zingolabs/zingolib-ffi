@@ -6,6 +6,7 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 plugins {
+    id("maven-publish")
     id("com.android.library")
     kotlin("android")
 }
@@ -29,11 +30,29 @@ android {
         getByName("androidTest").java.srcDirs("src/androidTest/kotlin")
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            // optionally withJavadocJar()
+        }
+    }
+
     kotlinOptions {
         jvmTarget = "11"
     }
 }
-
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "org.zingolabs"
+                artifactId = "zingolib-android"
+                version = "0.0.1"
+            }
+        }
+    }
+}
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api(libs.commons.math3)
